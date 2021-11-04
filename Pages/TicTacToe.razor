@@ -1,9 +1,13 @@
 ﻿@page "/"
 @using global::App.Client.Web
 
-<h2>Welcome to Tic-Tac-Toe!</h2>
+
 
 <div class="container-fluid" style="width:500px; padding-bottom:2rem;">
+    <div class="row justify-content-md-center align-items-center"
+         style="padding-bottom: 2rem">
+        <h2>Welcome to Tic-Tac-Toe!</h2>
+    </div>    
     <div class="row justify-content-md-center align-items-center">
         <div class="col col-lg-2 text-center border-bottom border-right">
             <span style="font-size:xx-large">@board[0]</span>
@@ -39,7 +43,7 @@
     </div>
 </div>
 
-<div class="container-fluid" style="width:400px;">
+<div class="container-fluid" style="width:450px;">
     <div class="row justify-content-md-center align-items-center">
         <div class="col-12 text-left">
             <span style="font-size:large">@message</span>

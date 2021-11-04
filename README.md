@@ -1,5 +1,7 @@
 # Blazor Tic-Tac-Toe Web Application
 
+![Demo](./docs/img/input-box-demo.gif)
+
 Blazor is an open source .NET web front-end framework that allows us to create client-side applications using C# and HTML.
 
 ## I. App Setup 
@@ -37,4 +39,21 @@ Take a quick look at the contents of the `BlazorApp` directory. Several files we
 
 ## II. Build a Tic-Tac-Toe board razor component
 
-1. Rename the `Counter.razor` file in the `Pages` directory to `TicTacToe.razor`
+1. Rename the `Home.razor` file in the `Pages` directory to `TicTacToe.razor`
+
+2. Remove `Counter.razor`, `FetchData.razor`, and `Index.razor` from the `Pages` directory
+
+3. In the `Shared` directory, remove the `Counter` and `Fetch data` line items from the unordered list
+
+```c#
+// Shared/NavMenu.razor
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="/">
+                <span class="oi oi-x" aria-hidden="true"></span> Tic-Tac-Toe
+            </NavLink>
+        </li>
+    </ul>
+</div>
+```

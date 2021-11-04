@@ -9,4 +9,8 @@
     <PackageReference Include="TicTacToe" Version="1.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="docs\img" />
+  </ItemGroup>
+
 </Project>
