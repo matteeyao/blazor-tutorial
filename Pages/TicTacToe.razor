@@ -1,72 +1,111 @@
-﻿@page "/counter"
-@using global::App
+﻿@page "/"
+@using global::App.Client.Web
 
-<h1>Tic-Tac-Toe</h1>
+<h2>Welcome to Tic-Tac-Toe!</h2>
 
 <div class="container-fluid" style="width:500px; padding-bottom:2rem;">
     <div class="row justify-content-md-center align-items-center">
-        <div class="col col-lg-2 text-center border-bottom border-right" @onclick="@IncrementCount">
-            <span style="font-size:xx-large">X</span>
+        <div class="col col-lg-2 text-center border-bottom border-right">
+            <span style="font-size:xx-large">@board[0]</span>
         </div>
-        <div class="col col-lg-2 text-center border-bottom" @onclick="@IncrementCount">
-            <span style="font-size:xx-large">X</span>
+        <div class="col col-lg-2 text-center border-bottom">
+            <span style="font-size:xx-large">@board[1]</span>
         </div>
-        <div class="col col-lg-2 text-center border-bottom border-left" @onclick="@IncrementCount">
-            <span style="font-size:xx-large">X</span>
-        </div>
-    </div>
-    <div class="row justify-content-md-center align-items-center">
-        <div class="col col-lg-2 text-center border-right" @onclick="@IncrementCount">
-            <span style="font-size:xx-large">X</span>
-        </div>
-        <div class="col col-lg-2 text-center" @onclick="@IncrementCount">
-            <span style="font-size:xx-large">X</span>
-        </div>
-        <div class="col col-lg-2 text-center border-left" @onclick="@IncrementCount">
-            <span style="font-size:xx-large">X</span>
+        <div class="col col-lg-2 text-center border-bottom border-left">
+            <span style="font-size:xx-large">@board[2]</span>
         </div>
     </div>
     <div class="row justify-content-md-center align-items-center">
-        <div class="col col-lg-2 text-center border-top border-right" @onclick="@IncrementCount">
-            <span style="font-size:xx-large">X</span>
+        <div class="col col-lg-2 text-center border-right">
+            <span style="font-size:xx-large">@board[3]</span>
         </div>
-        <div class="col col-lg-2 text-center border-top" @onclick="@IncrementCount">
-            <span style="font-size:xx-large">X</span>
+        <div class="col col-lg-2 text-center">
+            <span style="font-size:xx-large">@board[4]</span>
         </div>
-        <div class="col col-lg-2 text-center border-top border-left" @onclick="@IncrementCount">
-            <span style="font-size:xx-large">X</span>
+        <div class="col col-lg-2 text-center border-left">
+            <span style="font-size:xx-large">@board[5]</span>
+        </div>
+    </div>
+    <div class="row justify-content-md-center align-items-center">
+        <div class="col col-lg-2 text-center border-top border-right">
+            <span style="font-size:xx-large">@board[6]</span>
+        </div>
+        <div class="col col-lg-2 text-center border-top">
+            <span style="font-size:xx-large">@board[7]</span>
+        </div>
+        <div class="col col-lg-2 text-center border-top border-left">
+            <span style="font-size:xx-large">@board[8]</span>
         </div>
     </div>
 </div>
 
-<div class="container-fluid" style="width:500px;">
+<div class="container-fluid" style="width:400px;">
     <div class="row justify-content-md-center align-items-center">
         <div class="col-12 text-left">
-            <span style="font-size:large">Current count: @currentCount</span>
-            @* <p></p> *@
+            <span style="font-size:large">@message</span>
         </div>
+         <div class="col-12 text-left" style="min-height: 24px">
+            <span style="font-size:medium; color: darkred">@error</span>
+         </div>
     </div>
     <div class="row justify-content-md-center align-items-center">
-        <div class="col-10">
-            <input style="line-height: 2rem; width: 26rem;"/>
+        <div class="col-9" style="padding-right: 5px;">
+            <input style="line-height: 2rem; min-width: 100%;" 
+                   @bind="input" 
+                   disabled="@web.IsGameOver()" />
         </div>
-        <div class="col-2">
-            <button class="btn btn-primary" @onclick="IncrementCount">Submit</button>
+        <div class="col-3" style="padding-left: 0">
+            <button class="btn btn-primary" 
+                    style="min-width: 100%" 
+                    @onclick="Submit"
+                    disabled="@web.IsGameOver()">Submit</button>
         </div>
+        <div class="col-12" 
+             style="padding-left: 4rem; min-height: 14px; min-width: 36rem"></div>
     </div>
+     <div class="row justify-content-md-center align-items-right">
+         <div class="col-12">
+             <button class="btn btn-primary" 
+                     style="min-width: 100%; background-color: darkred; border-color: darkred" 
+                     @onclick="Reset">Reset</button>
+         </div>
+     </div>
 </div>
 
-
-
-
-
-
 @code {
-    // private TicTacToe.Sho 
-    private int currentCount = 0;
+    static Web web = new Web();
+    string[] board;
+    string message;
+    string error = String.Empty;
+    string input;
 
-    private void IncrementCount()
+    protected override void OnInitialized()
     {
-        currentCount++;
+        FetchUI();
+    }
+
+    private void FetchUI()
+    {
+        board = web.Board();
+        error = web.MessageHandler.Error;
+        message = web.MessageHandler.Message;
+    }
+
+    private void Submit()
+    {
+        if (!string.IsNullOrWhiteSpace(input))
+        {
+            web.MessageHandler.Input = input;
+            web.Run(web, web.MessageHandler.Input);
+            input = String.Empty;
+            FetchUI();
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private void Reset()
+    {
+        web = new Web();
+        FetchUI();
     }
 }
