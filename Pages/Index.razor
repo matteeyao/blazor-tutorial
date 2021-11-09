@@ -1,113 +1,113 @@
 ﻿@page "/"
-@using TicTacToeEngine.Client.Web
-
-<div class="container-fluid" style="width:500px; padding-bottom:2rem;">
-    <div class="row justify-content-md-center align-items-center"
-         style="padding-bottom: 2rem">
-        <h2>Welcome to Tic-Tac-Toe!</h2>
-    </div>
-    <div class="row justify-content-md-center align-items-center">
-        <div class="col col-lg-2 text-center border-bottom border-right">
-            <span style="font-size:xx-large">@board[0]</span>
-        </div>
-        <div class="col col-lg-2 text-center border-bottom">
-            <span style="font-size:xx-large">@board[1]</span>
-        </div>
-        <div class="col col-lg-2 text-center border-bottom border-left">
-            <span style="font-size:xx-large">@board[2]</span>
-        </div>
-    </div>
-    <div class="row justify-content-md-center align-items-center">
-        <div class="col col-lg-2 text-center border-right">
-            <span style="font-size:xx-large">@board[3]</span>
-        </div>
-        <div class="col col-lg-2 text-center">
-            <span style="font-size:xx-large">@board[4]</span>
-        </div>
-        <div class="col col-lg-2 text-center border-left">
-            <span style="font-size:xx-large">@board[5]</span>
-        </div>
-    </div>
-    <div class="row justify-content-md-center align-items-center">
-        <div class="col col-lg-2 text-center border-top border-right">
-            <span style="font-size:xx-large">@board[6]</span>
-        </div>
-        <div class="col col-lg-2 text-center border-top">
-            <span style="font-size:xx-large">@board[7]</span>
-        </div>
-        <div class="col col-lg-2 text-center border-top border-left">
-            <span style="font-size:xx-large">@board[8]</span>
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid" style="width:450px;">
-    <div class="row justify-content-md-center align-items-center">
-        <div class="col-12 text-left">
-            <span style="font-size:large">@message</span>
-        </div>
-         <div class="col-12 text-left" style="min-height: 24px">
-            <span style="font-size:medium; color: darkred">@error</span>
-         </div>
-    </div>
-    <div class="row justify-content-md-center align-items-center">
-        <div class="col-9" style="padding-right: 5px;">
-            <input style="line-height: 2rem; min-width: 100%;"
-                   @bind="input"
-                   disabled="@web.IsGameOver()" />
-        </div>
-        <div class="col-3" style="padding-left: 0">
-            <button class="btn btn-primary"
-                    style="min-width: 100%"
-                    @onclick="Submit"
-                    disabled="@web.IsGameOver()">Submit</button>
-        </div>
-        <div class="col-12"
-             style="padding-left: 4rem; min-height: 14px; min-width: 36rem"></div>
-    </div>
-     <div class="row justify-content-md-center align-items-right">
-         <div class="col-12">
-             <button class="btn btn-primary"
-                     style="min-width: 100%; background-color: darkred; border-color: darkred"
-                     @onclick="Reset">Reset</button>
-         </div>
-     </div>
-</div>
-
-@code {
-    static Web web = new Web();
-    string[] board;
-    string message;
-    string error = String.Empty;
-    string input;
-
-    protected override void OnInitialized()
-    {
-        FetchUI();
-    }
-
-    private void FetchUI()
-    {
-        board = web.Board();
-        error = web.MessageHandler.Error;
-        message = web.MessageHandler.Message;
-    }
-
-    private void Submit()
-    {
-        if (!string.IsNullOrWhiteSpace(input))
-        {
-            web.MessageHandler.Input = input;
-            web.Run(web, web.MessageHandler.Input);
-            input = String.Empty;
-            FetchUI();
-            InvokeAsync(StateHasChanged);
-        }
-    }
-
-    private void Reset()
-    {
-        web = new Web();
-        FetchUI();
-    }
-}
+@* @using TicTacToeEngine.Client.Web *@
+@* *@
+@* <div class="container-fluid" style="width:500px; padding-bottom:2rem;"> *@
+@*     <div class="row justify-content-md-center align-items-center" *@
+@*          style="padding-bottom: 2rem"> *@
+@*         <h2>Welcome to Tic-Tac-Toe!</h2> *@
+@*     </div> *@
+@*     <div class="row justify-content-md-center align-items-center"> *@
+@*         <div class="col col-lg-2 text-center border-bottom border-right"> *@
+@*             <span style="font-size:xx-large">@board[0]</span> *@
+@*         </div> *@
+@*         <div class="col col-lg-2 text-center border-bottom"> *@
+@*             <span style="font-size:xx-large">@board[1]</span> *@
+@*         </div> *@
+@*         <div class="col col-lg-2 text-center border-bottom border-left"> *@
+@*             <span style="font-size:xx-large">@board[2]</span> *@
+@*         </div> *@
+@*     </div> *@
+@*     <div class="row justify-content-md-center align-items-center"> *@
+@*         <div class="col col-lg-2 text-center border-right"> *@
+@*             <span style="font-size:xx-large">@board[3]</span> *@
+@*         </div> *@
+@*         <div class="col col-lg-2 text-center"> *@
+@*             <span style="font-size:xx-large">@board[4]</span> *@
+@*         </div> *@
+@*         <div class="col col-lg-2 text-center border-left"> *@
+@*             <span style="font-size:xx-large">@board[5]</span> *@
+@*         </div> *@
+@*     </div> *@
+@*     <div class="row justify-content-md-center align-items-center"> *@
+@*         <div class="col col-lg-2 text-center border-top border-right"> *@
+@*             <span style="font-size:xx-large">@board[6]</span> *@
+@*         </div> *@
+@*         <div class="col col-lg-2 text-center border-top"> *@
+@*             <span style="font-size:xx-large">@board[7]</span> *@
+@*         </div> *@
+@*         <div class="col col-lg-2 text-center border-top border-left"> *@
+@*             <span style="font-size:xx-large">@board[8]</span> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
+@* *@
+@* <div class="container-fluid" style="width:450px;"> *@
+@*     <div class="row justify-content-md-center align-items-center"> *@
+@*         <div class="col-12 text-left"> *@
+@*             <span style="font-size:large">@message</span> *@
+@*         </div> *@
+@*          <div class="col-12 text-left" style="min-height: 24px"> *@
+@*             <span style="font-size:medium; color: darkred">@error</span> *@
+@*          </div> *@
+@*     </div> *@
+@*     <div class="row justify-content-md-center align-items-center"> *@
+@*         <div class="col-9" style="padding-right: 5px;"> *@
+@*             <input style="line-height: 2rem; min-width: 100%;" *@
+@*                    @bind="input" *@
+@*                    disabled="@web.IsGameOver()" /> *@
+@*         </div> *@
+@*         <div class="col-3" style="padding-left: 0"> *@
+@*             <button class="btn btn-primary" *@
+@*                     style="min-width: 100%" *@
+@*                     @onclick="Submit" *@
+@*                     disabled="@web.IsGameOver()">Submit</button> *@
+@*         </div> *@
+@*         <div class="col-12" *@
+@*              style="padding-left: 4rem; min-height: 14px; min-width: 36rem"></div> *@
+@*     </div> *@
+@*      <div class="row justify-content-md-center align-items-right"> *@
+@*          <div class="col-12"> *@
+@*              <button class="btn btn-primary" *@
+@*                      style="min-width: 100%; background-color: darkred; border-color: darkred" *@
+@*                      @onclick="Reset">Reset</button> *@
+@*          </div> *@
+@*      </div> *@
+@* </div> *@
+@* *@
+@* @code { *@
+@*     static Web web = new Web(); *@
+@*     string[] board; *@
+@*     string message; *@
+@*     string error = String.Empty; *@
+@*     string input; *@
+@* *@
+@*     protected override void OnInitialized() *@
+@*     { *@
+@*         FetchUI(); *@
+@*     } *@
+@* *@
+@*     private void FetchUI() *@
+@*     { *@
+@*         board = web.Board(); *@
+@*         error = web.MessageHandler.Error; *@
+@*         message = web.MessageHandler.Message; *@
+@*     } *@
+@* *@
+@*     private void Submit() *@
+@*     { *@
+@*         if (!string.IsNullOrWhiteSpace(input)) *@
+@*         { *@
+@*             web.MessageHandler.Input = input; *@
+@*             web.Run(web, web.MessageHandler.Input); *@
+@*             input = String.Empty; *@
+@*             FetchUI(); *@
+@*             InvokeAsync(StateHasChanged); *@
+@*         } *@
+@*     } *@
+@* *@
+@*     private void Reset() *@
+@*     { *@
+@*         web = new Web(); *@
+@*         FetchUI(); *@
+@*     } *@
+@* } *@
