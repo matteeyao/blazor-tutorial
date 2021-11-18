@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TicTacToe.Engine" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include=".circleci\config.yml" />
+  </ItemGroup>
+
+</Project>
